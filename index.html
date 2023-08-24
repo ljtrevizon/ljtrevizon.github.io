@@ -7,5 +7,37 @@
 </head>
 <body>
     <h1>Aja</h1>
+    <label>Pulse el boton para generar una imagen aleatoria de un gato</label>
+    <input type="button" onclick="randomCat()" value="Generar">
+    <br>
+    <img class="GatitoYPerro" src="" id="imgCat" width="150px" weight="150px">
+    <br>
+    <label>Pulse el boton para generar una imagen aleatoria de un perro</label>
+    <input type="button" onclick="randomDog()" value="Generar">
+    <br>
+    <img class="GatitoYPerro" src="" id="imgDog" width="150px" weight="150px">
+    <script>
+        function randomCat() {
+            var imgCat = document.getElementById("imgCat")
+            fetch("https://api.thecatapi.com/v1/images/search")
+                .then((resp) => {
+                    return resp.json()
+                })
+                .then(function (data) {
+                    obj = data[0]
+                    imgCat.src = obj.url
+                })
+        }
+        function randomDog() {
+            var imgDog = document.getElementById("imgDog")
+            fetch("https://api.thedogapi.com/v1/images/search")
+                .then((resp) => {
+                    return resp.json()
+                })
+                .then(function (data) {
+                    obj = data[0]
+                    imgDog.src = obj.url
+                })
+        }
 </body>
 </html>
