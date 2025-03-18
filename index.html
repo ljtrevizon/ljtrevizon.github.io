@@ -6,39 +6,18 @@
     <title>Aja</title>
 </head>
 <body>
-    <h1>Aja</h1>
-    <label>Pulse el boton para generar una imagen aleatoria de un gato</label>
-    <input type="button" onclick="randomCat()" value="Generar">
-    <br>
-    <img class="GatitoYPerro" src="" id="imgCat" width="150px" weight="150px">
-    <br>
-    <label>Pulse el boton para generar una imagen aleatoria de un perro</label>
-    <input type="button" onclick="randomDog()" value="Generar">
-    <br>
-    <img class="GatitoYPerro" src="" id="imgDog" width="150px" weight="150px">
-    <script>
-        function randomCat() {
-            var imgCat = document.getElementById("imgCat")
-            fetch("https://api.thecatapi.com/v1/images/search")
-                .then((resp) => {
-                    return resp.json()
-                })
-                .then(function (data) {
-                    obj = data[0]
-                    imgCat.src = obj.url
-                })
-        }
-        function randomDog() {
-            var imgDog = document.getElementById("imgDog")
-            fetch("https://api.thedogapi.com/v1/images/search")
-                .then((resp) => {
-                    return resp.json()
-                })
-                .then(function (data) {
-                    obj = data[0]
-                    imgDog.src = obj.url
-                })
-        }
-    </script>
+    <form method="POST" action="https://script.google.com/macros/s/AKfycbwofCQeC_3fiTxljUTbUvY5YcEvpH0u6hyAEP4ZqDHEsY2ybdozxuUAt3urwfv8mXoY/exec">
+        <input name="nombre_negocio" type="text" placeholder="Nombre del Negocio" required>
+        <br>
+        <input name="nombre_producto" type="text" placeholder="Nombre del Producto" required>
+        <br>
+        <input name="cantidad" type="number" placeholder="Cantidad del Producto" required>
+        <br>
+        <input name="precio_bs" type="number" placeholder="Precio del Producto en Bs" required>
+        <br>
+        <input name="precio_usd" type="number" placeholder="Precio del Producto en USD" required>
+        <br>
+        <button type="submit">Send</button>
+      </form>
 </body>
 </html>
