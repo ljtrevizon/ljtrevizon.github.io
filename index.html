@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aja</title>
 </head>
+
 <body>
-    <form method="POST" action="https://script.google.com/macros/s/AKfycbwofCQeC_3fiTxljUTbUvY5YcEvpH0u6hyAEP4ZqDHEsY2ybdozxuUAt3urwfv8mXoY/exec">
+    <form>
         <input name="nombre_negocio" type="text" placeholder="Nombre del Negocio" required>
         <br>
         <input name="nombre_producto" type="text" placeholder="Nombre del Producto" required>
         <br>
         <input name="cantidad" type="number" placeholder="Cantidad del Producto" required>
         <br>
-        <input name="precio_bs" type="number" placeholder="Precio del Producto en Bs" required>
+        <input name="precio_bs" type="number" step="0.01" placeholder="Precio del Producto en Bs" required>
         <br>
-        <input name="precio_usd" type="number" placeholder="Precio del Producto en USD" required>
+        <input name="precio_usd" type="number" step="0.01" placeholder="Precio del Producto en USD" required>
         <br>
-        <button type="submit">Send</button>
-      </form>
+        <button type="submit" onclick="sample(this);return false;">Send</button>
+    </form>
 </body>
+<script>
+    function sample(e) {
+
+        const url = "https://script.google.com/macros/s/AKfycbwofCQeC_3fiTxljUTbUvY5YcEvpH0u6hyAEP4ZqDHEsY2ybdozxuUAt3urwfv8mXoY/exec"; // Please set your Web Apps URL.
+        const obj = [...e.parentNode].reduce((o, f) => (o[f.name] = f.value, o), {});
+        const query = new URLSearchParams(obj);
+        fetch(url + "?" + query, { method: "POST" })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                alert(res.result);
+            });
+    }
+</script>
+
 </html>
