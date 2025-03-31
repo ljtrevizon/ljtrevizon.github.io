@@ -34,9 +34,15 @@
         <br>
         <input name="cantidad" type="text" placeholder="Cantidad del Producto" required>
         <br>
-        <input name="tasa_bcv" type="number" step="0.001" placeholder="Tasa del BCV en dicho Dia" required>
+        <input name="tasa_bcv" type="number" step="0.01" placeholder="Tasa del BCV en dicho Dia" required>
         <br>
-        <input name="precio_usd" type="number" step="0.01" placeholder="Precio del Producto en USD" required>
+        <label>Precio en Bs</label>
+        <input type="radio" name="precio_eleccion" value="precio_bs">
+        <br>
+        <label>Precio en USD</label>
+        <input type="radio" name="precio_eleccion" value="precio_usd">
+        <br>
+        <input id="precio" type="number" step="0.01" placeholder="Precio del Producto en USD o Bs" required>
         <br>
         <button type="submit" onclick="sample(this);return false;">Send</button>
         <button type="reset">Limpiar</button>
@@ -44,17 +50,31 @@
 </body>
 <script>
     function sample(e) {
-
+        if (e.form.cantidad.value == "" || e.form.tasa_bcv.value == "" || e.form.precio.value == "" || e.form.precio_eleccion.value == "" || e.form.nombre_negocio.value == "" || e.form.categoria_producto.value == "" || e.form.nombre_producto.value == "") {
+            alert("Algun valor esta vacio")
+            return false
+        }
+        var precio_usd = 0
+        var precio_bs = 0
+        if (e.form.precio_eleccion.value == "precio_bs") {
+            precio_usd = e.form.precio.value / e.form.tasa_bcv.value
+            precio_bs = e.form.precio.value
+        } else {
+            precio_bs = e.form.precio.value * e.form.tasa_bcv.value
+            precio_usd = e.form.precio.value
+        }
+        console.log(precio_usd)
+        console.log(precio_bs)
         const url = "https://script.google.com/macros/s/AKfycbwofCQeC_3fiTxljUTbUvY5YcEvpH0u6hyAEP4ZqDHEsY2ybdozxuUAt3urwfv8mXoY/exec"; // Please set your Web Apps URL.
         const obj = {
             "": "",
             "cantidad": e.form.cantidad.value,
             "tasa_bcv": e.form.tasa_bcv.value,
-            "precio_usd": e.form.precio_usd.value,
+            "precio_usd": parseFloat(precio_usd),
             "nombre_negocio": e.form.nombre_negocio.value,
             "nombre_producto": e.form.nombre_producto.value,
             "categoria_producto": e.form.categoria_producto.value,
-            "precio_bs": e.form.precio_usd.value * e.form.tasa_bcv.value
+            "precio_bs": parseFloat(precio_bs)
         }
         console.log(obj)
         const query = new URLSearchParams(obj);
