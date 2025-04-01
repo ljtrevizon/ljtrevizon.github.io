@@ -9,7 +9,12 @@
 </head>
 
 <body>
+    <h1>IPC de Barquisimeto</h1>
+    <h2>Hecho por Luis Trevizon (Economia)</h2>
+    <h3>UCLA (Universidad Centroccidental Lisandro Alvarado)</h3>
+
     <form>
+        <label for="">Introduzca el nombre del Negocio</label>
         <input name="nombre_negocio" type="text" placeholder="Nombre del Negocio" required>
         <br>
         <label for="">Selecciona la categoria del Producto</label>
@@ -33,18 +38,22 @@
             <option value="">N/A</option>
         </select>
         <br>
-        <input name="cantidad" type="text" placeholder="Cantidad del Producto" required>
+        <label for="">Introduzca la cantidad del producto</label>
+        <input name="cantidad" type="text" placeholder="Cantidad" required>
         <br>
-        <input name="tasa_bcv" type="number" step="0.01" placeholder="Tasa del BCV en dicho Dia" required>
+        <label for="">Introduzca la tasa oficial BCV al dia actual</label>
+        <input name="tasa_bcv" type="number" step="0.01" placeholder="Tasa" required>
         <br>
-        <label>Precio en Bs</label>
-        <input type="radio" name="precio_eleccion" value="precio_bs">
+        <label for="">Introduzca el precio del Producto en Bs o USD</label>
+        <input id="precio" type="number" step="0.01" placeholder="Precio" required>
         <br>
-        <label>Precio en USD</label>
-        <input type="radio" name="precio_eleccion" value="precio_usd">
-        <br>
-        <input id="precio" type="number" step="0.01" placeholder="Precio del Producto en USD o Bs" required>
-        <br>
+        <div class="radio-group">
+            <label>Precio en Bs</label>
+            <input type="radio" name="precio_eleccion" value="precio_bs">
+            <br>
+            <label>Precio en USD</label>
+            <input type="radio" name="precio_eleccion" value="precio_usd">
+        </div>
         <button type="submit" onclick="sample(this);return false;">Send</button>
         <button type="reset">Limpiar</button>
     </form>
@@ -80,6 +89,7 @@
             .then((res) => res.json())
             .then((res) => {
                 console.log(res);
+                e.form.reset();
                 alert(res.result);
             });
     }

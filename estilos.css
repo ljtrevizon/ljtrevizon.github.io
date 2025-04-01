@@ -4,26 +4,55 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
 
+h1 {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+
+h2 {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+
+h3 {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: normal;
+}
+
 form {
-    background: white;
-    padding: 30px;
+    background: #e8f5e9;
+    padding: 15px;
+    /* Reducido de 20px a 15px para hacer el formulario más compacto */
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     width: 400px;
     display: flex;
     flex-direction: column;
-    border: 1px solid #ddd;
+    border: 1px solid #2e7d32;
 }
 
-input, select, button {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
+input,
+select,
+button {
+    width: 90%;
+    padding: 8px;
+    /* Reducido de 10px a 8px para menos altura en los elementos */
+    margin: 5px 0;
+    /* Reducido de 8px a 5px para menos separación entre elementos */
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 16px;
@@ -33,14 +62,17 @@ label {
     font-size: 14px;
     font-weight: bold;
     color: #333;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
+    /* Reducido de 3px a 2px para menor separación */
 }
 
 .radio-group {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin: 10px 0;
+    gap: 5px;
+    /* Reducido de 10px a 5px para menor separación entre radio buttons */
+    margin: 5px 0;
+    /* Reducido de 8px a 5px para menor separación vertical */
 }
 
 .radio-group input[type="radio"] {
@@ -64,9 +96,10 @@ button:hover {
 
 @media (max-width: 480px) {
     body {
-        padding: 20px;
+        padding: 15px;
     }
+
     form {
-        width: 100%;
+        width: 90%;
     }
 }
