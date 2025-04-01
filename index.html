@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
     <title>IPC</title>
 </head>
 
@@ -63,8 +64,6 @@
             precio_bs = e.form.precio.value * e.form.tasa_bcv.value
             precio_usd = e.form.precio.value
         }
-        console.log(precio_usd)
-        console.log(precio_bs)
         const url = "https://script.google.com/macros/s/AKfycbwofCQeC_3fiTxljUTbUvY5YcEvpH0u6hyAEP4ZqDHEsY2ybdozxuUAt3urwfv8mXoY/exec"; // Please set your Web Apps URL.
         const obj = {
             "": "",
@@ -76,7 +75,6 @@
             "categoria_producto": e.form.categoria_producto.value,
             "precio_bs": parseFloat(precio_bs)
         }
-        console.log(obj)
         const query = new URLSearchParams(obj);
         fetch(url + "?" + query, { method: "POST" })
             .then((res) => res.json())
