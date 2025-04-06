@@ -57,8 +57,25 @@
         <button type="submit" onclick="sample(this);return false;">Send</button>
         <button type="reset">Limpiar</button>
     </form>
+    <button style="width: 45%;" onclick="mostrar_resultados()">Mostrar resultados</button>
+    <div id="resultado">
+        <h3>Resultados:</h3>
+        <p id="total-bs">Total en Bolivares (Bs): </p>
+        <p id="total-usd">Total en  Dolares ($): </p>
+    </div>
 </body>
 <script>
+    async function mostrar_resultados() {
+        var arr_bs = []
+        var arr_usd = []
+        arr_bs = await getArray(8)
+        arr_usd = await getArray(7)
+        var total_bs = sumar_arr(arr_bs)
+        var total_usd = sumar_arr(arr_usd)
+
+        document.getElementById("total-bs").textContent += total_bs
+        document.getElementById("total-usd").textContent += total_usd
+    }
     function sample(e) {
         if (e.form.cantidad.value == "" || e.form.tasa_bcv.value == "" || e.form.precio.value == "" || e.form.precio_eleccion.value == "" || e.form.nombre_negocio.value == "" || e.form.categoria_producto.value == "" || e.form.nombre_producto.value == "") {
             alert("Algun valor esta vacio")
@@ -93,6 +110,25 @@
                 alert(res.result);
             });
     }
+    async function getArray(colNum) {
+        const colNumber = parseInt(colNum);
+        const url = `https://script.google.com/macros/s/AKfycbz3GR0kFg4jsDe5TEE77VnwdVMOALWL-WE0FKqlNPRI722uPTuXL-DogKUK_I9E_jHK/exec?col=${colNumber}`;
+        var numb = await fetch(url)
+            .then(response => {
+                if (!response.ok) throw new Error('Error en la respuesta');
+                return response.json();
+            })
+            .then(data => {
+                console.log('Datos recibidos:', data.data);
+                return data.data;
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos:', error);
+            });
+        return numb
+    }
+
+
     var value_pescados = ["", "atun_fresco", "atun_enlatado", "sardina_fresca", "sardina_enlatada", "cazon_merluza", "coro_coro_carite"]
     var value_carnes = ["", "molida_res", "lagarto", "higado_res", "carne_pollo", "jamon", "mortadela", "carne_cochino", "bistec"]
     var value_cereales_derivados = ["", "arroz", "avena_derivados", "harina_maiz_precocida", "harina_trigo", "pastas_alimenticias", "pan_trigo"]
@@ -135,6 +171,13 @@
             producto.options[0].value = ""
             producto.options[0].text = "N/A"
         }
+    }
+    function sumar_arr(arr) {
+        var sum = 0
+        for (var i = 0; i < arr.length; i++) {
+            sum += arr[i]
+        }
+        return sum
     }
 </script>
 
