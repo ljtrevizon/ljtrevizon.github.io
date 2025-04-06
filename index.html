@@ -73,8 +73,8 @@
         var total_bs = sumar_arr(arr_bs)
         var total_usd = sumar_arr(arr_usd)
 
-        document.getElementById("total-bs").textContent += total_bs
-        document.getElementById("total-usd").textContent += total_usd
+        document.getElementById("total-bs").textContent += Math.round(total_bs * 100) / 100
+        document.getElementById("total-usd").textContent += Math.round(total_usd * 100) / 100
     }
     function sample(e) {
         if (e.form.cantidad.value == "" || e.form.tasa_bcv.value == "" || e.form.precio.value == "" || e.form.precio_eleccion.value == "" || e.form.nombre_negocio.value == "" || e.form.categoria_producto.value == "" || e.form.nombre_producto.value == "") {
