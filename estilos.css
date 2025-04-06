@@ -51,50 +51,78 @@ form {
 }
 
 table {
-    border-collapse: collapse;
-    border: 2px solid #007bff;
-    /* Borde azul */
-    letter-spacing: 1px;
-    font-size: 0.9rem;
-    /* Tamaño de fuente similar a otros elementos */
+    border-collapse: separate;
+    /* Permite mostrar bordes separados */
+    border-spacing: 2px;
+    /* Espacio entre celdas */
+    border: 2px solid #2e7d32;
+    width: 100%;
+    max-width: 400px;
     margin: 20px auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
-    width: 400px;
-    /* Ancho de la tabla */
-    height: 200px;
-    /* Alto de la tabla */
-}
-
-td,
-th {
-    border: 1px solid rgb(190, 190, 190);
-    padding: 5px;
-    /* Ajustado para evitar expansión */
-    overflow: hidden;
-    /* Para que el contenido no sobrepase el tamaño de la celda */
-}
-
-th {
-    background-color: #f9f9f9;
-    /* Fondo claro */
-    font-weight: bold;
-    color: #003153;
-    /* Texto azul oscuro */
-}
-
-td {
-    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
 }
 
 caption {
-    padding: 10px;
-    font-size: 1.2rem;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #2e7d32;
+    background-color: #e8f5e9;
+    border-bottom: 1px solid #ccc;
+}
+
+thead {
+    background-color: #e8f5e9;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ccc;
+    /* Aquí se asegura el borde interno visible */
+    color: #333;
+    background-color: #fefefe;
+}
+
+th {
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+tfoot {
+    background-color: #f1f8e9;
     font-weight: bold;
     color: #003153;
-    /* Texto azul oscuro */
+    border-top: 2px solid #2e7d32;
 }
+
+tr:hover {
+    background-color: #f4fdf3;
+}
+
+@media (max-width: 480px) {
+    table {
+        width: 95%;
+    }
+
+    th,
+    td {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    caption {
+        font-size: 1rem;
+    }
+}
+
+
 
 input,
 select,
