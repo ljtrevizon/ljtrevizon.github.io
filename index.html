@@ -25,7 +25,7 @@
             <option value="pescados">Pescados</option>
             <option value="leche_quesos_huevos">Leche/Quesos/Huevos</option>
             <option value="frutas_hortalizas">Frutas/Hortalizas</option>
-            <option value="gracias_aceites">Gracias/Aceites</option>
+            <option value="grasas_aceites">Grasas/Aceites</option>
             <option value="raices_tuberculos">Raices/Tuberculos</option>
             <option value="semillas_oleag_leguminosas">Semillas Oleag/Leguminosas</option>
             <option value="azucar_similares">Azucar y Similares</option>
@@ -57,23 +57,205 @@
         <button type="submit" onclick="sample(this);return false;">Send</button>
         <button type="reset">Limpiar</button>
     </form>
-    <button style="width: 45%;" onclick="mostrar_resultados()">Mostrar resultados</button>
+    <button style="width: 45%;" onclick="actualizar_tabla()">Mostrar resultados</button>
     <div id="resultado">
         <h3>Resultados:</h3>
-        <p id="total-bs">Total en Bolivares (Bs): </p>
-        <p id="total-usd">Total en  Dolares ($): </p>
+        <table>
+            <thead>
+                <th>Categoria</th>
+                <th>Bs</th>
+                <th>USD</th>
+                <th>%</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Cereales y Derivados</td>
+                    <td id="cereales_derivados_bs"></td>
+                    <td id="cereales_derivados_usd"></td>
+                    <td id="cereales_derivados_porcentaje"></td>
+                </tr>
+                <tr>
+                    <td>Carnes</td>
+                    <td id="carnes_bs"></td>
+                    <td id="carnes_usd"></td>
+                    <td id="carnes_porcentaje"></td>
+                </tr>
+                <tr>
+                    <td>Pescados</td>
+                    <td id="pescados_bs"></td>
+                    <td id="pescados_usd"></td>
+                    <td id="pescados_porcentaje"></td>
+                </tr>
+                <tr>
+                    <td>Leche/Quesos/Huevos</td>
+                    <td id="leche_quesos_huevos_bs"></td>
+                    <td id="leche_quesos_huevos_usd"></td>
+                    <td id="leche_quesos_huevos_porcentaje"></td>
+                </tr>
+                <tr>
+                    <td>Frutas/Hortalizas</td>
+                    <td id="frutas_hortalizas_bs"></td>
+                    <td id="frutas_hortalizas_usd"></td>
+                    <td id="frutas_hortalizas_porcentaje"></td>
+                </tr>
+                <tr>
+                    <td>Grasas/Aceites</td>
+                    <td id="grasas_aceites_bs"></td>
+                    <td id="grasas_aceites_usd"></td>
+                    <td id="grasas_aceites_porcentaje"></td>
+                </tr>
+                <tr>
+                    <td>Raices/Tuberculos</td>
+                    <td id="raices_tuberculos_bs"></td>
+                    <td id="raices_tuberculos_usd"></td>
+                    <td id="raices_tuberculos_porcentaje"></td>
+                </tr>
+                <tr>
+                    <td>Semillas Oleag/Leguminosas</td>
+                    <td id="semillas_oleag_leguminosas_bs"></td>
+                    <td id="semillas_oleag_leguminosas_usd"></td>
+                    <td id="semillas_oleag_leguminosas_porcentaje"></td>
+                </tr>
+                <tr>
+                    <td>Azucar y Similares</td>
+                    <td id="azucar_similares_bs"></td>
+                    <td id="azucar_similares_usd"></td>
+                    <td id="azucar_similares_porcentaje"></td>
+                </tr>
+                <tr>
+                    <td>Bebidas No Alcoholicas</td>
+                    <td id="bebidas_no_alcoholicas_bs"></td>
+                    <td id="bebidas_no_alcoholicas_usd"></td>
+                    <td id="bebidas_no_alcoholicas_porcentaje"></td>
+                </tr>
+                <tr>
+                    <td>Productos Alimenticios</td>
+                    <td id="productos_alimenticios_bs"></td>
+                    <td id="productos_alimenticios_usd"></td>
+                    <td id="productos_alimenticios_porcentaje"></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Totales</td>
+                    <td id="totales_bs"></td>
+                    <td id="totales_usd"></td>
+                    <td id="totales_porcentaje"></td>
+                </tr>
+            </tfoot>
+        </table>
     </div>
 </body>
 <script>
+    async function actualizar_tabla() {
+        var datos_totales = await getArray()
+        var carnes_usd = []
+        var carnes_bs = []
+        var cereales_derivados_usd = []
+        var cereales_derivados_bs = []
+        var pescados_usd = []
+        var pescados_bs = []
+        var leche_quesos_huevos_usd = []
+        var leche_quesos_huevos_bs = []
+        var frutas_hortalizas_usd = []
+        var frutas_hortalizas_bs = []
+        var grasas_aceites_usd = []
+        var grasas_aceites_bs = []
+        var raices_tuberculos_usd = []
+        var raices_tuberculos_bs = []
+        var semillas_oleag_leguminosas_usd = []
+        var semillas_oleag_leguminosas_bs = []
+        var azucar_similares_usd = []
+        var azucar_similares_bs = []
+        var bebidas_no_alcoholicas_usd = []
+        var bebidas_no_alcoholicas_bs = []
+        var productos_alimenticios_usd = []
+        var productos_alimenticios_bs = []
+        var total_bs = []
+        var total_usd = []
+        for (let i = 0; i < datos_totales.length; i++) {
+            if (datos_totales[i][0] == "carnes") {
+                carnes_usd.push(datos_totales[i][1])
+                carnes_bs.push(datos_totales[i][2])
+            } else if (datos_totales[i][0] == "cereales_derivados") {
+                cereales_derivados_usd.push(datos_totales[i][1])
+                cereales_derivados_bs.push(datos_totales[i][2])
+            } else if (datos_totales[i][0] == "pescados") {
+                pescados_usd.push(datos_totales[i][1])
+                pescados_bs.push(datos_totales[i][2])
+            } else if (datos_totales[i][0] == "leche_quesos_huevos") {
+                leche_quesos_huevos_usd.push(datos_totales[i][1])
+                leche_quesos_huevos_bs.push(datos_totales[i][2])
+            } else if (datos_totales[i][0] == "frutas_hortalizas") {
+                frutas_hortalizas_usd.push(datos_totales[i][1])
+                frutas_hortalizas_bs.push(datos_totales[i][2])
+            } else if (datos_totales[i][0] == "grasas_aceites") {
+                grasas_aceites_usd.push(datos_totales[i][1])
+                grasas_aceites_bs.push(datos_totales[i][2])
+            } else if (datos_totales[i][0] == "raices_tuberculos") {
+                raices_tuberculos_usd.push(datos_totales[i][1])
+                raices_tuberculos_bs.push(datos_totales[i][2])
+            } else if (datos_totales[i][0] == "semillas_oleag_leguminosas") {
+                semillas_oleag_leguminosas_usd.push(datos_totales[i][1])
+                semillas_oleag_leguminosas_bs.push(datos_totales[i][2])
+            } else if (datos_totales[i][0] == "azucar_similares") {
+                azucar_similares_usd.push(datos_totales[i][1])
+                azucar_similares_bs.push(datos_totales[i][2])
+            } else if (datos_totales[i][0] == "bebidas_no_alcoholicas") {
+                bebidas_no_alcoholicas_usd.push(datos_totales[i][1])
+                bebidas_no_alcoholicas_bs.push(datos_totales[i][2])
+            } else if (datos_totales[i][0] == "productos_alimenticios") {
+                productos_alimenticios_usd.push(datos_totales[i][1])
+                productos_alimenticios_bs.push(datos_totales[i][2])
+            }
+            total_bs.push(datos_totales[i][2])
+            total_usd.push(datos_totales[i][1])
+        }
+        document.getElementById("carnes_porcentaje").textContent = Math.round((sumar_arr(carnes_usd) / sumar_arr(total_usd)) * 10000) / 100 + "%"
+        document.getElementById("cereales_derivados_porcentaje").textContent = Math.round((sumar_arr(cereales_derivados_usd) / sumar_arr(total_usd)) * 10000) / 100 + "%"
+        document.getElementById("pescados_porcentaje").textContent = Math.round((sumar_arr(pescados_usd) / sumar_arr(total_usd)) * 100) / 100 + "%"
+        document.getElementById("leche_quesos_huevos_porcentaje").textContent = Math.round((sumar_arr(leche_quesos_huevos_usd) / sumar_arr(total_usd)) * 10000) / 100 + "%"
+        document.getElementById("frutas_hortalizas_porcentaje").textContent = Math.round((sumar_arr(frutas_hortalizas_usd) / sumar_arr(total_usd)) * 10000) / 100 + "%"
+        document.getElementById("grasas_aceites_porcentaje").textContent = Math.round((sumar_arr(grasas_aceites_usd) / sumar_arr(total_usd)) * 10000) / 100 + "%"
+        document.getElementById("raices_tuberculos_porcentaje").textContent = Math.round((sumar_arr(raices_tuberculos_usd) / sumar_arr(total_usd)) * 10000) / 100 + "%"
+        document.getElementById("semillas_oleag_leguminosas_porcentaje").textContent = Math.round((sumar_arr(semillas_oleag_leguminosas_usd) / sumar_arr(total_usd)) * 10000) / 100 + "%"
+        document.getElementById("azucar_similares_porcentaje").textContent = Math.round((sumar_arr(azucar_similares_usd) / sumar_arr(total_usd)) * 10000) / 100 + "%"
+        document.getElementById("bebidas_no_alcoholicas_porcentaje").textContent = Math.round((sumar_arr(bebidas_no_alcoholicas_usd) / sumar_arr(total_usd)) * 10000) / 100 + "%"
+        document.getElementById("productos_alimenticios_porcentaje").textContent = Math.round((sumar_arr(productos_alimenticios_usd) / sumar_arr(total_usd)) * 10000) / 100 + "%"
+        document.getElementById("totales_porcentaje").textContent = Math.round((sumar_arr(total_usd) / sumar_arr(total_usd)) * 10000) / 100 + "%"
+        document.getElementById("carnes_usd").textContent = Math.round(sumar_arr(carnes_usd) * 100) / 100
+        document.getElementById("carnes_bs").textContent = Math.round(sumar_arr(carnes_bs) * 100) / 100
+        document.getElementById("cereales_derivados_usd").textContent = Math.round(sumar_arr(cereales_derivados_usd) * 100) / 100
+        document.getElementById("cereales_derivados_bs").textContent = Math.round(sumar_arr(cereales_derivados_bs) * 100) / 100
+        document.getElementById("pescados_usd").textContent = Math.round(sumar_arr(pescados_usd) * 100) / 100
+        document.getElementById("pescados_bs").textContent = Math.round(sumar_arr(pescados_bs) * 100) / 100
+        document.getElementById("leche_quesos_huevos_usd").textContent = Math.round(sumar_arr(leche_quesos_huevos_usd) * 100) / 100
+        document.getElementById("leche_quesos_huevos_bs").textContent = Math.round(sumar_arr(leche_quesos_huevos_bs) * 100) / 100
+        document.getElementById("frutas_hortalizas_usd").textContent = Math.round(sumar_arr(frutas_hortalizas_usd) * 100) / 100
+        document.getElementById("frutas_hortalizas_bs").textContent = Math.round(sumar_arr(frutas_hortalizas_bs) * 100) / 100
+        document.getElementById("grasas_aceites_usd").textContent = Math.round(sumar_arr(grasas_aceites_usd) * 100) / 100
+        document.getElementById("grasas_aceites_bs").textContent = Math.round(sumar_arr(grasas_aceites_bs) * 100) / 100
+        document.getElementById("raices_tuberculos_usd").textContent = Math.round(sumar_arr(raices_tuberculos_usd) * 100) / 100
+        document.getElementById("raices_tuberculos_bs").textContent = Math.round(sumar_arr(raices_tuberculos_bs) * 100) / 100
+        document.getElementById("semillas_oleag_leguminosas_usd").textContent = Math.round(sumar_arr(semillas_oleag_leguminosas_usd) * 100) / 100
+        document.getElementById("semillas_oleag_leguminosas_bs").textContent = Math.round(sumar_arr(semillas_oleag_leguminosas_bs) * 100) / 100
+        document.getElementById("azucar_similares_usd").textContent = Math.round(sumar_arr(azucar_similares_usd) * 100) / 100
+        document.getElementById("azucar_similares_bs").textContent = Math.round(sumar_arr(azucar_similares_bs) * 100) / 100
+        document.getElementById("bebidas_no_alcoholicas_usd").textContent = Math.round(sumar_arr(bebidas_no_alcoholicas_usd) * 100) / 100
+        document.getElementById("bebidas_no_alcoholicas_bs").textContent = Math.round(sumar_arr(bebidas_no_alcoholicas_bs) * 100) / 100
+        document.getElementById("productos_alimenticios_usd").textContent = Math.round(sumar_arr(productos_alimenticios_usd) * 100) / 100
+        document.getElementById("productos_alimenticios_bs").textContent = Math.round(sumar_arr(productos_alimenticios_bs) * 100) / 100
+        document.getElementById("totales_usd").textContent = Math.round(sumar_arr(total_usd) * 100) / 100
+        document.getElementById("totales_bs").textContent = Math.round(sumar_arr(total_bs) * 100) / 100
+    }
     async function mostrar_resultados() {
         var arr_bs = []
         var arr_usd = []
-        arr_bs = await getArray(8)
-        arr_usd = await getArray(7)
+        arr_bs = await getArray(7)
+        arr_usd = await getArray(6)
         var total_bs = sumar_arr(arr_bs)
         var total_usd = sumar_arr(arr_usd)
-
-        document.getElementById("total-bs").textContent ="Total en Bolivares (Bs): " + Math.round(total_bs * 100) / 100
+        document.getElementById("total-bs").textContent = "Total en Bolivares (Bs): " + Math.round(total_bs * 100) / 100
         document.getElementById("total-usd").textContent = "Total en  Dolares ($): " + Math.round(total_usd * 100) / 100
     }
     function sample(e) {
@@ -110,9 +292,8 @@
                 alert(res.result);
             });
     }
-    async function getArray(colNum) {
-        const colNumber = parseInt(colNum);
-        const url = `https://script.google.com/macros/s/AKfycbz3GR0kFg4jsDe5TEE77VnwdVMOALWL-WE0FKqlNPRI722uPTuXL-DogKUK_I9E_jHK/exec?col=${colNumber}`;
+    async function getArray() {
+        const url = `https://script.google.com/macros/s/AKfycbz3GR0kFg4jsDe5TEE77VnwdVMOALWL-WE0FKqlNPRI722uPTuXL-DogKUK_I9E_jHK/exec`;
         var numb = await fetch(url)
             .then(response => {
                 if (!response.ok) throw new Error('Error en la respuesta');
@@ -134,7 +315,7 @@
     var value_cereales_derivados = ["", "arroz", "avena_derivados", "harina_maiz_precocida", "harina_trigo", "pastas_alimenticias", "pan_trigo"]
     var value_leche_quesos_huevos = ["", "huevo_gallina", "leche_polvo", "queso_blanco", "queso_amarillo"]
     var value_frutas_hortalizas = ["", "cambur_banano", "guayaba", "lechoza", "melon", "naranja", "patilla", "platano_maduro", "piña", "parchita", "limon", "remolacha", "auyama", "cebolla", "pimenton", "tomate", "zanahoria", "espinaca", "repollo"]
-    var value_gracias_aceites = ["", "aceite_vegetal", "margarina"]
+    var value_grasas_aceites = ["", "aceite_vegetal", "margarina"]
     var value_raices_tuberculos = ["", "apio", "ocumo", "papas", "yuca", "verduras_surtidas"]
     var value_semillas_oleag_leguminosas = ["", "caraotas_negras", "arvejas", "frijoles", "lentejas"]
     var value_azucar_similares = ["", "azucar", "sal"]
@@ -145,7 +326,7 @@
     var texto_cereales_derivados = ["N/A", "Arroz", "Avena y Derivados", "Harina de Maiz Precocida", "Harina de Trigo", "Pastas Alimenticias", "Pan de Trigo"]
     var texto_leche_quesos_huevos = ["N/A", "Huevo de Gallina", "Leche en Polvo", "Queso Blanco", "Queso Amarillo"]
     var texto_frutas_hortalizas = ["N/A", "Cambur banano", "Guayaba", "Lechoza", "Melon", "Naranja", "Patilla", "Platano maduro", "Piña", "Parchita", "Limon", "Remolacha", "Auyama", "Cebolla", "Pimenton", "Tomate", "Zanahoria", "Espinaca", "Repollo"]
-    var texto_gracias_aceites = ["N/A", "Aceite Vegetal", "Margarina"]
+    var texto_grasas_aceites = ["N/A", "Aceite Vegetal", "Margarina"]
     var texto_raices_tuberculos = ["N/A", "Apio", "Ocumo", "Papas", "Yuca", "Verduras Surtidas"]
     var texto_semillas_oleag_leguminosas = ["N/A", "Caraotas Negras", "Arvejas", "Frijoles", "Lentejas"]
     var texto_azucar_similares = ["N/A", "Azucar", "Sal"]
