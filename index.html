@@ -65,7 +65,8 @@
                 <th>Categoria</th>
                 <th>Bs</th>
                 <th>USD</th>
-                <th>%</th>
+                <th>% USD</th>
+                <th>% Bs</th>
             </thead>
             <tbody>
                 <tr>
@@ -73,66 +74,79 @@
                     <td id="cereales_derivados_bs"></td>
                     <td id="cereales_derivados_usd"></td>
                     <td id="cereales_derivados_porcentaje"></td>
+                    <td id="cereales_derivados_porcentaje_bs"></td>
+
                 </tr>
                 <tr>
                     <td>Carnes</td>
                     <td id="carnes_bs"></td>
                     <td id="carnes_usd"></td>
                     <td id="carnes_porcentaje"></td>
+                    <td id="carnes_porcentaje_bs"></td>
                 </tr>
                 <tr>
                     <td>Pescados</td>
                     <td id="pescados_bs"></td>
                     <td id="pescados_usd"></td>
                     <td id="pescados_porcentaje"></td>
+                    <td id="pescados_porcentaje_bs"></td>
+
                 </tr>
                 <tr>
                     <td>Leche/Quesos/Huevos</td>
                     <td id="leche_quesos_huevos_bs"></td>
                     <td id="leche_quesos_huevos_usd"></td>
                     <td id="leche_quesos_huevos_porcentaje"></td>
+                    <td id="leche_quesos_huevos_porcentaje_bs"></td>
                 </tr>
                 <tr>
                     <td>Frutas/Hortalizas</td>
                     <td id="frutas_hortalizas_bs"></td>
                     <td id="frutas_hortalizas_usd"></td>
                     <td id="frutas_hortalizas_porcentaje"></td>
+                    <td id="frutas_hortalizas_porcentaje_bs"></td>
                 </tr>
                 <tr>
                     <td>Grasas/Aceites</td>
                     <td id="grasas_aceites_bs"></td>
                     <td id="grasas_aceites_usd"></td>
                     <td id="grasas_aceites_porcentaje"></td>
+                    <td id="grasas_aceites_porcentaje_bs"></td>
                 </tr>
                 <tr>
                     <td>Raices/Tuberculos</td>
                     <td id="raices_tuberculos_bs"></td>
                     <td id="raices_tuberculos_usd"></td>
                     <td id="raices_tuberculos_porcentaje"></td>
+                    <td id="raices_tuberculos_porcentaje_bs"></td>
                 </tr>
                 <tr>
                     <td>Semillas Oleag/Leguminosas</td>
                     <td id="semillas_oleag_leguminosas_bs"></td>
                     <td id="semillas_oleag_leguminosas_usd"></td>
                     <td id="semillas_oleag_leguminosas_porcentaje"></td>
+                    <td id="semillas_oleag_leguminosas_porcentaje_bs"></td>
                 </tr>
                 <tr>
                     <td>Azucar y Similares</td>
                     <td id="azucar_similares_bs"></td>
                     <td id="azucar_similares_usd"></td>
                     <td id="azucar_similares_porcentaje"></td>
+                    <td id="azucar_similares_porcentaje_bs"></td>
                 </tr>
                 <tr>
                     <td>Bebidas No Alcoholicas</td>
                     <td id="bebidas_no_alcoholicas_bs"></td>
                     <td id="bebidas_no_alcoholicas_usd"></td>
                     <td id="bebidas_no_alcoholicas_porcentaje"></td>
+                    <td id="bebidas_no_alcoholicas_porcentaje_bs"></td>
                 </tr>
                 <tr>
                     <td>Productos Alimenticios</td>
                     <td id="productos_alimenticios_bs"></td>
                     <td id="productos_alimenticios_usd"></td>
                     <td id="productos_alimenticios_porcentaje"></td>
+                    <td id="productos_alimenticios_porcentaje_bs"></td>
                 </tr>
             </tbody>
             <tfoot>
@@ -141,6 +155,7 @@
                     <td id="totales_bs"></td>
                     <td id="totales_usd"></td>
                     <td id="totales_porcentaje"></td>
+                    <td id="totales_porcentaje_bs"></td>
                 </tr>
             </tfoot>
         </table>
@@ -223,6 +238,18 @@
         document.getElementById("bebidas_no_alcoholicas_porcentaje").textContent = Math.round((sumar_arr(bebidas_no_alcoholicas_usd) / sumar_arr(total_usd)) * 10000) / 100 + "%"
         document.getElementById("productos_alimenticios_porcentaje").textContent = Math.round((sumar_arr(productos_alimenticios_usd) / sumar_arr(total_usd)) * 10000) / 100 + "%"
         document.getElementById("totales_porcentaje").textContent = Math.round((sumar_arr(total_usd) / sumar_arr(total_usd)) * 10000) / 100 + "%"
+        document.getElementById("bebidas_no_alcoholicas_porcentaje_bs").textContent = Math.round((sumar_arr(bebidas_no_alcoholicas_bs) / sumar_arr(total_bs)) * 10000) / 100 + "%"
+        document.getElementById("carnes_porcentaje_bs").textContent = Math.round((sumar_arr(carnes_bs) / sumar_arr(total_bs)) * 10000) / 100 + "%"
+        document.getElementById("cereales_derivados_porcentaje_bs").textContent = Math.round((sumar_arr(cereales_derivados_bs) / sumar_arr(total_bs)) * 10000) / 100 + "%"
+        document.getElementById("pescados_porcentaje_bs").textContent = Math.round((sumar_arr(pescados_bs) / sumar_arr(total_bs)) * 10000) / 100 + "%"
+        document.getElementById("leche_quesos_huevos_porcentaje_bs").textContent = Math.round((sumar_arr(leche_quesos_huevos_bs) / sumar_arr(total_bs)) * 10000) / 100 + "%"
+        document.getElementById("frutas_hortalizas_porcentaje_bs").textContent = Math.round((sumar_arr(frutas_hortalizas_bs) / sumar_arr(total_bs)) * 10000) / 100 + "%"
+        document.getElementById("grasas_aceites_porcentaje_bs").textContent = Math.round((sumar_arr(grasas_aceites_bs) / sumar_arr(total_bs)) * 10000) / 100 + "%"
+        document.getElementById("raices_tuberculos_porcentaje_bs").textContent = Math.round((sumar_arr(raices_tuberculos_bs) / sumar_arr(total_bs)) * 10000) / 100 + "%"
+        document.getElementById("semillas_oleag_leguminosas_porcentaje_bs").textContent = Math.round((sumar_arr(semillas_oleag_leguminosas_bs) / sumar_arr(total_bs)) * 10000) / 100 + "%"
+        document.getElementById("azucar_similares_porcentaje_bs").textContent = Math.round((sumar_arr(azucar_similares_bs) / sumar_arr(total_bs)) * 10000) / 100 + "%"
+        document.getElementById("productos_alimenticios_porcentaje_bs").textContent = Math.round((sumar_arr(productos_alimenticios_bs) / sumar_arr(total_bs)) * 10000) / 100 + "%"
+        document.getElementById("totales_porcentaje_bs").textContent = Math.round((sumar_arr(total_bs) / sumar_arr(total_bs)) * 10000) / 100 + "%"
         document.getElementById("carnes_usd").textContent = Math.round(sumar_arr(carnes_usd) * 100) / 100
         document.getElementById("carnes_bs").textContent = Math.round(sumar_arr(carnes_bs) * 100) / 100
         document.getElementById("cereales_derivados_usd").textContent = Math.round(sumar_arr(cereales_derivados_usd) * 100) / 100
@@ -248,16 +275,7 @@
         document.getElementById("totales_usd").textContent = Math.round(sumar_arr(total_usd) * 100) / 100
         document.getElementById("totales_bs").textContent = Math.round(sumar_arr(total_bs) * 100) / 100
     }
-    async function mostrar_resultados() {
-        var arr_bs = []
-        var arr_usd = []
-        arr_bs = await getArray(7)
-        arr_usd = await getArray(6)
-        var total_bs = sumar_arr(arr_bs)
-        var total_usd = sumar_arr(arr_usd)
-        document.getElementById("total-bs").textContent = "Total en Bolivares (Bs): " + Math.round(total_bs * 100) / 100
-        document.getElementById("total-usd").textContent = "Total en  Dolares ($): " + Math.round(total_usd * 100) / 100
-    }
+    
     function sample(e) {
         if (e.form.cantidad.value == "" || e.form.tasa_bcv.value == "" || e.form.precio.value == "" || e.form.precio_eleccion.value == "" || e.form.nombre_negocio.value == "" || e.form.categoria_producto.value == "" || e.form.nombre_producto.value == "") {
             alert("Algun valor esta vacio")
