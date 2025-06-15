@@ -1,12 +1,18 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prueba</title>
     <link rel="stylesheet" href="styles.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' http://127.0.0.1:8000/">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta http-equiv="Access-Control-Allow-Methods" content="GET, POST, OPTIONS">
+    <meta http-equiv="Access-Control-Allow-Headers" content="Content-Type, Accept">
 </head>
+
 <body>
     <label for="cantidad">Ingrese una cantidad:</label>
     <input type="number" id="cantidad" name="cantidad">
@@ -17,4 +23,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
